@@ -53,13 +53,13 @@ Realice los siguientes ejercicios de graficación en R (el valor porcentual de c
 ca_covid19 <- read.csv(file='https://raw.githubusercontent.com/pf0953-programaciongeoespacialr-2020/datos/master/covid19/casos/ca/2020_09_15_CSV_GENERAL.csv')
 
 # Despliegue de los datos
-ca_covid19
+View(ca_covid19)
 ```
 
 2. (10%) Genere un resumen de los datos con la función  ```summary() ```.
 
 ```{r}
-
+summary (ca_covid19)
 ```
 
 3. Genere gráficos de barras de los casos positivos (20%), recuperados (20%), activos (20%) y fallecidos (20%).
@@ -72,19 +72,49 @@ Las barras deben estar ordenadas de mayor (a la izquierda o arriba) a menor (a l
 - Cantidad de casos en cada barra.
 
 ```{r}
+library(ggplot2)
 
+ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos))+
+geom_col(fill="dark green")+
+  ggtitle("Casos COVID-19 positivos en CA y el caribe")+
+  xlab("Países")+
+  ylab("Número de casos")+
+  theme_classic()+
+  geom_text(aes(label=positivos), vjust=-0.4, size=3.5)+
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -recuperados), y=recuperados))+
+geom_col(fill="blue")+
+  ggtitle("Casos COVID-19 recuperados en CA y el caribe")+
+  xlab("Países")+
+  ylab("Número de casos")+
+  theme_classic()+
+  geom_text(aes(label=recuperados), vjust=-0.4, size=3.5)+
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -activos), y=activos))+
+geom_col(fill="red")+
+  ggtitle("Casos COVID-19 activos en CA y el caribe")+
+  xlab("Países")+
+  ylab("Número de casos")+
+  theme_classic()+
+  geom_text(aes(label=activos), vjust=-0.4, size=3.5)+
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
 ```
 
 ```{r}
-
+ggplot(ca_covid19, aes(x=reorder(pais, -fallecidos), y=fallecidos))+
+geom_col(fill="purple")+
+  ggtitle("Casos COVID-19 fallecidos en CA y el caribe")+
+  xlab("Países")+
+  ylab("Número de casos")+
+  theme_classic()+
+  geom_text(aes(label=fallecidos), vjust=-0.4, size=3.5)+
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
 ```
 
 4. (10% - OPCIONAL) Genere un solo gráfico de barras que presente los cuatros tipos de casos, ya sea en barras apiladas o agrupadas.
