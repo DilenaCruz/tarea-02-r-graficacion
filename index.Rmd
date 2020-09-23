@@ -76,7 +76,7 @@ library(ggplot2)
 
 ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos))+
 geom_col(fill="dark green")+
-  ggtitle("Casos COVID-19 positivos en CA y el caribe")+
+  ggtitle("Casos COVID-19 positivos en CA y Rep.Dom")+
   xlab("Países")+
   ylab("Número de casos")+
   theme_classic()+
@@ -87,7 +87,7 @@ geom_col(fill="dark green")+
 ```{r}
 ggplot(ca_covid19, aes(x=reorder(pais, -recuperados), y=recuperados))+
 geom_col(fill="blue")+
-  ggtitle("Casos COVID-19 recuperados en CA y el caribe")+
+  ggtitle("Casos COVID-19 recuperados en CA y Rep.Dom")+
   xlab("Países")+
   ylab("Número de casos")+
   theme_classic()+
@@ -98,7 +98,7 @@ geom_col(fill="blue")+
 ```{r}
 ggplot(ca_covid19, aes(x=reorder(pais, -activos), y=activos))+
 geom_col(fill="red")+
-  ggtitle("Casos COVID-19 activos en CA y el caribe")+
+  ggtitle("Casos COVID-19 activos en CA y Rep.Dom")+
   xlab("Países")+
   ylab("Número de casos")+
   theme_classic()+
@@ -109,7 +109,7 @@ geom_col(fill="red")+
 ```{r}
 ggplot(ca_covid19, aes(x=reorder(pais, -fallecidos), y=fallecidos))+
 geom_col(fill="purple")+
-  ggtitle("Casos COVID-19 fallecidos en CA y el caribe")+
+  ggtitle("Casos COVID-19 fallecidos en CA y Rep.Dom")+
   xlab("Países")+
   ylab("Número de casos")+
   theme_classic()+
@@ -120,5 +120,12 @@ geom_col(fill="purple")+
 4. (10% - OPCIONAL) Genere un solo gráfico de barras que presente los cuatros tipos de casos, ya sea en barras apiladas o agrupadas.
 
 ```{r}
+library(tidyr)
+acomodo<- gather(ca_covid19, condicion, cantidad, -pais)
+
+ggplot(acomodo, aes(x = pais, y = cantidad, fill = condicion)) +
+  geom_col(position = "dodge")+
+  ggtitle("Comportamiento Covid-19 en centroamérica y Rep. Dominicana")+ xlab("Paises")+ ylab("Número de casos")+
+  theme_classic() + theme(plot.title = element_text(hjust = 0.5, size = 11, face = "bold"), legend.position = c(0.95, 0.8))
 
 ```
